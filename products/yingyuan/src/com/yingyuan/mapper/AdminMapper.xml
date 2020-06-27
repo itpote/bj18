@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yingyuan.dao.AdminDao" >
+  <resultMap id="BaseResultMap" type="com.yingyuan.model.Admin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="qx" property="qx" jdbcType="VARCHAR" />
+    <result column="gmtTime" property="gmt_time" jdbcType="DATE" />
+    <result column="uptTime" property="upt_time" jdbcType="DATE" />
+  </resultMap>
+  <select id="selectAdminByusernamepwd" resultType="Admin">
+  	select id,username,password,phone,qx,gmt_time gmtTime,upt_time uptTime,isable from admin
+  	<where>
+  	<if test="username!=null">
+  	and username=#{username}
+  	</if>
+  	<if test="password!=null">
+  	and password=#{password}
+  	</if>
+  	<if test="isable!=null">
+  	and isable=#{isable}
+  	</if>
+  	<if test="id!=null">
+  	and id=#{id}
+  	</if>
+  	<if test="phone!=null and phone!=''">
+  	and phone=#{phone}
+  	</if>
+  	</where>
+  	    <choose>
+            <when test="pageSize!=null">
+                limit ${pageNum},${pageSize}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+  </select>
+  <select id="selectAdmintotal" resultType="java.lang.Integer">
+  		select count(*) from admin
+  		<where>
+  		  	<if test="phone!=null and phone!=''">
+  				and phone=#{phone}
+  			</if>
+  		</where>
+  </select>
+  <update id="updatePassword" parameterType="Admin">
+  	update admin set password=#{password},phone=#{phone},username=#{username},upt_time=#{uptTime},isable=#{isable}
+  	where id=#{id}
+  </update>
+  <insert id="insertAdmin" parameterType="Admin">
+  		INSERT INTO admin(phone,username, isable,password,qx, gmt_time,upt_time) VALUES (#{phone}, 
+  		#{username},#{isable},#{password},#{qx},#{gmtTime},#{uptTime})	
+  </insert>
+ 
+  
+ 
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 给包里面的类取个别名，可写可不写，注意它的顺序在properties标签后 -->
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+		<package name="com.yingyuan.model" />
+	</typeAliases>
+
+	<!-- <plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">	 -->
+			<!-- dialect数据库的方言，什么数据库，分页插件的版本不同，interceptor与property的name写法有所不同 -->
+		<!--	<property name="dialect" value="mysql" />
+		</plugin>
+	</plugins>	
+	 -->
+</configuration>
